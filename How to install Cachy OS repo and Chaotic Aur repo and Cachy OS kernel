@@ -1,0 +1,71 @@
+First Let's setup the Caotic AUR:
+
+Run theses 2 commands together:
+
+sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+sudo pacman-key --lsign-key 3056513887B78AEB
+
+Then these 2 together:
+
+sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
+sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+
+Now let's install Cachy OS repository:
+
+Run these commands together:
+
+curl -O https://mirror.cachyos.org/cachyos-repo.tar.xz
+tar xvf cachyos-repo.tar.xz && cd cachyos-repo
+
+# Run the automated installer
+
+sudo ./cachyos-repo.sh
+
+It's going to ask you if you want to install, say yes, and it's probably going to ask you if you want to upgrade firmware, say yes, but then when it asks you to do a full system upgrade, say no
+
+Then open file manager and navigate to /etc/pacman.conf and open it with your text editor
+
+scroll down until you see 4 cachy os entries cut them out and repaste them at the end of the file making sure you leave one space in between each entry and then under the Cachy os entries add the chaotic aur entry
+
+[chaotic-aur]
+Include = /etc/pacman.d/chaotic-mirrorlist
+
+Then open terminal and run:
+
+sudo pacman -Syu
+
+Now you can install Cachy OS kernel-manager and the Cachy OS settings just remember when it ask you to select between packages select the Cachy OS one.
+
+yay -S cachyos-kernel-manager
+
+yay -S cachyos-settings
+
+Now open kernel-manager and install whatever kernel you want and don't forget to update your grub with 
+
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+or install this package to make it easier
+
+yay -S update-grub
+
+then you can do this command to update your grub:
+
+sudo update-grub 
+
+Then Reboot and select new kernel in advance option in grub
+
+To remove old kernel just do this command:
+
+sudo pacman -Rc linux linux-headers
+
+If you have Lts kernel to remove do this command:
+
+sudo pacman -Rc linux-lts linux-lts-headers
+
+Then update your grub:
+
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+or
+sudo update-grub
+
+That's it Enjoy
