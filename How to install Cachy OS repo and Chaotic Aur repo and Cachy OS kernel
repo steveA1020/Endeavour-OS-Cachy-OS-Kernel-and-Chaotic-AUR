@@ -68,4 +68,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 or
 sudo update-grub
 
+Link to my video:
+https://youtu.be/T4lU5zuvirg
+
 That's it Enjoy
